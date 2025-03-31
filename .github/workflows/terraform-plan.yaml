@@ -36,7 +36,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
-          role-session-name: GitHubActions
+          role-session-name: github-actions-role
           aws-region: eu-west-2
 
       - name: Initialize Terraform
