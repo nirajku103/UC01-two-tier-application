@@ -1,9 +1,11 @@
 name: Terraform Apply
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - Terraform Plan  # This must match the `name` field in terraform-plan.yaml
+    types:
+      - completed
 
 permissions:
   id-token: write
@@ -11,7 +13,7 @@ permissions:
 
 jobs:
   terraform-apply:
-    # if: github.event.pull_request.merged == true
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -22,13 +24,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: latest
-      
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v2
-      #   with:
-      #     role-to-assume: ${{ secrets.AWS_ROLE }}
-      #     role-session-name: GitHubActions
-      #     aws-region: eu-west-2
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -45,4 +40,4 @@ jobs:
       - name: Apply Terraform Changes
         run: |
           cd terraform
-          terraform plan -var-file="prod.tfvars"
+          terraform apply -var-file="prod.tfvars" -auto-approve
