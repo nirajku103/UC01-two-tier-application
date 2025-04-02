@@ -18,7 +18,7 @@ rds_sg_ingress_to_port = 3306
 rds_sg_ingress_protocol = "tcp"
 rds_sg_ingress_cidr_blocks = ["0.0.0.0/0"]
 
-ec2_ami_id = "ami-08b5b3a93ed654d19"  # Ensure this AMI ID is valid
+ec2_ami_id = "ami-0d8423e33dfb7aaea"  # Ensure this AMI ID is valid
 ec2_instance_type = "t2.micro"
 
 rds_allocated_storage = 20
