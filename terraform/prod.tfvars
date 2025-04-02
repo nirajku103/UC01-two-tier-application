@@ -19,7 +19,7 @@ rds_sg_ingress_protocol = "tcp"
 rds_sg_ingress_cidr_blocks = ["0.0.0.0/0"]
 
 ec2_ami_id = "ami-0d8423e33dfb7aaea"  # Ensure this AMI ID is valid
-ec2_instance_type = "t2.micro"
+ec2_instance_type = "t3.micro"
 
 rds_allocated_storage = 20
 rds_engine = "mysql"
